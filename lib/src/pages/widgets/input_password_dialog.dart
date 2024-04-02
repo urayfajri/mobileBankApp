@@ -82,6 +82,7 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                                   ? Icons.visibility
                                   : Icons.visibility_off_rounded,
                               size: 30,
+                              color: Colors.blue,
                             ),
                           ),
                         ),
