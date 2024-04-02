@@ -2,15 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class BlurDialog extends StatefulWidget {
-  const BlurDialog({super.key});
+class InputPasswordDialog extends StatefulWidget {
+  const InputPasswordDialog({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _BlurDialogState createState() => _BlurDialogState();
+  _InputPasswordDialogState createState() => _InputPasswordDialogState();
 }
 
-class _BlurDialogState extends State<BlurDialog> {
+class _InputPasswordDialogState extends State<InputPasswordDialog> {
   bool _isPasswordVisible = false;
 
   @override
@@ -32,7 +32,7 @@ class _BlurDialogState extends State<BlurDialog> {
                   Container(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      icon: Icon(Icons.close),
+                      icon: const Icon(Icons.close),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -91,7 +91,7 @@ class _BlurDialogState extends State<BlurDialog> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle login button press
+                      Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -112,11 +112,19 @@ class _BlurDialogState extends State<BlurDialog> {
                     child: const Text('Login'),
                   ),
                   const SizedBox(height: 20),
-                  const Text('Lupa Password?',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Lupa Password?',
                       style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14)),
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 30)
                 ],
               ),
