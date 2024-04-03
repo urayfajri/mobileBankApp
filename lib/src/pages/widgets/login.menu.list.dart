@@ -45,6 +45,10 @@ class _MenuIconsState extends State<MenuIcons> {
                         const ScanPage(),
                   ));
             },
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size.zero,
+            ),
             child: _buildMenuIcon(
                 Icons.qr_code_2_outlined, 'QR Bayar', Colors.blueAccent),
           ),
@@ -75,7 +79,7 @@ class _MenuIconsState extends State<MenuIcons> {
         ),
         const SizedBox(height: 5),
         Container(
-          constraints: const BoxConstraints(maxWidth: 55, minWidth: 55),
+          constraints: const BoxConstraints(maxWidth: 60, minWidth: 60),
           height: 60,
           child: Text(
             label,
