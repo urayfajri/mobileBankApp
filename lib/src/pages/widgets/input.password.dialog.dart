@@ -131,7 +131,7 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.blue,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 140, vertical: 15),
+                          horizontal: 136, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),

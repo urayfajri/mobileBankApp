@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/pages/scan.page.dart';
 
 class MenuIcons extends StatefulWidget {
   const MenuIcons({super.key});
@@ -20,8 +21,33 @@ class _MenuIconsState extends State<MenuIcons> {
           const SizedBox(width: 10),
           _buildMenuIcon(Icons.flash_on_outlined, 'Quick Pick', Colors.yellow),
           const SizedBox(width: 10),
-          _buildMenuIcon(
-              Icons.qr_code_2_outlined, 'QR Bayar', Colors.blueAccent),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(0.0, 1.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const ScanPage(),
+                  ));
+            },
+            child: _buildMenuIcon(
+                Icons.qr_code_2_outlined, 'QR Bayar', Colors.blueAccent),
+          ),
           const SizedBox(width: 10),
           _buildMenuIcon(
               Icons.qr_code_scanner, 'QR Terima Transfer', Colors.blue),
@@ -49,7 +75,7 @@ class _MenuIconsState extends State<MenuIcons> {
         ),
         const SizedBox(height: 5),
         Container(
-          constraints: const BoxConstraints(maxWidth: 60, minWidth: 60),
+          constraints: const BoxConstraints(maxWidth: 55, minWidth: 55),
           height: 60,
           child: Text(
             label,

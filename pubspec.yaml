@@ -34,6 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  qr_code_scanner: ^1.0.1
+  intl: ^0.19.0
   top_modal_sheet: ^2.1.0
   flutter_secure_storage: ^9.0.0
   page_transition: ^2.1.0
@@ -57,6 +59,10 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+
+  assets:
+    - assets/images/qris_logo.png
+
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

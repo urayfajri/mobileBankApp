@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -46,3 +47,5 @@ app.*.map.json
 /linux/flutter
 /macos/flutter
 /windows/flutter
+
+pubspec.lock
