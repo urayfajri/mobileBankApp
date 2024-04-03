@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -34,9 +36,65 @@ class _ScanQrisPage extends State<ScanQris> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black54,
+        ),
+        backgroundColor: Colors.white,
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(),
+            Expanded(
+              flex: 1,
+              child: Text(
+                'Scan QR',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.house,
+              color: Color.fromARGB(255, 255, 142, 44),
+              size: 24,
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: <Widget>[
+          // Background Color for the Title
+
           _buildQrView(context),
+          Positioned(
+            top: 20,
+            left: 0,
+            right: 0,
+            child: Container(
+              // Semi-transparent black background
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Center(
+                  child: Center(
+                    child: Text(
+                      'Scan QR atau\nbarcode untuk memulai transaksi',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned(
             bottom: 10,
             left: 0,
@@ -48,49 +106,69 @@ class _ScanQrisPage extends State<ScanQris> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo_qris.png',
-                        width: 80,
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await _controller?.toggleFlash();
-                          setState(() {});
-                        },
-                        borderRadius: BorderRadius.circular(
-                            30.0), // Mengatur sudut menjadi full rounded
-                        child: Container(
-                          padding: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white, // Warna background button
-                            borderRadius: BorderRadius.circular(
-                                30.0), // Mengatur sudut menjadi full rounded
-                          ),
-                          child: FutureBuilder(
-                            future: _controller?.getFlashStatus(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              } else {
-                                return Icon(
-                                  snapshot.data == true
-                                      ? Icons.flash_on
-                                      : Icons.flash_off,
-                                  color: Colors.orange,
-                                  size: 18.0,
-                                );
-                              }
-                            },
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          'assets/images/logo_qris.png',
+                          width: 80,
                         ),
-                      ),
-                    ],
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await _controller?.toggleFlash();
+                                setState(() {});
+                              },
+                              borderRadius: BorderRadius.circular(30.0),
+                              child: Container(
+                                padding: const EdgeInsets.all(6.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: FutureBuilder(
+                                  future: _controller?.getFlashStatus(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    } else {
+                                      return Icon(
+                                        snapshot.data == true
+                                            ? Icons.flash_on
+                                            : Icons.flash_off,
+                                        color: Colors.orange,
+                                        size: 18.0,
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(6.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              child: const Icon(
+                                Icons.image_outlined,
+                                color: Colors.orange,
+                                size: 18.0,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   const BtnMenuQris()
                 ],

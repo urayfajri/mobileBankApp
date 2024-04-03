@@ -120,6 +120,9 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
               )
             ]).show();
       },
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+      ),
       child: const BtnLogin(),
     );
   }

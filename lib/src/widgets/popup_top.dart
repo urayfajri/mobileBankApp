@@ -20,7 +20,7 @@ class PopUpTop extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(
-                Icons.error_outline,
+                Icons.warning_amber,
                 color: Colors.white,
                 size: 20,
               ),
