@@ -9,16 +9,12 @@ class BtnMenuQris extends StatefulWidget {
 }
 
 class _BtnMenuQrisState extends State<BtnMenuQris> {
-  final List<bool> _isClickedList = [
-    false,
-    false,
-    false
-  ]; // Initialize with 3 buttons
+  int _activeIndex = 0; // Initialize with the first button as active
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(35),
         color: Colors.white,
@@ -31,21 +27,21 @@ class _BtnMenuQrisState extends State<BtnMenuQris> {
             Expanded(
               child: BtnMenu(
                 onTap: () => _toggleClickedState(0),
-                isClicked: _isClickedList[0],
+                isClicked: _activeIndex == 0,
                 btnLabel: 'Scan QR',
               ),
             ),
             Expanded(
               child: BtnMenu(
                 onTap: () => _toggleClickedState(1),
-                isClicked: _isClickedList[1],
+                isClicked: _activeIndex == 1,
                 btnLabel: 'Kode Bayar',
               ),
             ),
             Expanded(
               child: BtnMenu(
                 onTap: () => _toggleClickedState(2),
-                isClicked: _isClickedList[2],
+                isClicked: _activeIndex == 2,
                 btnLabel: 'Terima Dana',
               ),
             ),
@@ -57,7 +53,7 @@ class _BtnMenuQrisState extends State<BtnMenuQris> {
 
   void _toggleClickedState(int index) {
     setState(() {
-      _isClickedList[index] = !_isClickedList[index];
+      _activeIndex = index;
     });
   }
 }
@@ -94,11 +90,12 @@ class BtnMenu extends StatelessWidget {
               Text(
                 btnLabel,
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isClicked
-                        ? Colors.white
-                        : const Color.fromARGB(255, 255, 142, 44)),
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: isClicked
+                      ? Colors.white
+                      : const Color.fromARGB(255, 255, 142, 44),
+                ),
               ),
             ],
           ),

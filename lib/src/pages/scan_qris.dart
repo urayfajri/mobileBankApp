@@ -2,11 +2,13 @@ import 'dart:developer';
 import 'dart:io';
 
 // import 'package:flutter/foundation.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
+import 'package:mobile_bank_app/src/pages/test_page.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:scanning_effect/scanning_effect.dart';
 
 class ScanQris extends StatefulWidget {
   const ScanQris({super.key});
@@ -132,10 +134,7 @@ class _ScanQrisPage extends State<ScanQris> {
                                 child: FutureBuilder(
                                   future: _controller?.getFlashStatus(),
                                   builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const CircularProgressIndicator();
-                                    } else if (snapshot.hasError) {
+                                    if (snapshot.hasError) {
                                       return Text('Error: ${snapshot.error}');
                                     } else {
                                       return Icon(
@@ -143,7 +142,7 @@ class _ScanQrisPage extends State<ScanQris> {
                                             ? Icons.flash_on
                                             : Icons.flash_off,
                                         color: Colors.orange,
-                                        size: 18.0,
+                                        size: 22.0,
                                       );
                                     }
                                   },
@@ -162,7 +161,7 @@ class _ScanQrisPage extends State<ScanQris> {
                               child: const Icon(
                                 Icons.image_outlined,
                                 color: Colors.orange,
-                                size: 18.0,
+                                size: 22.0,
                               ),
                             )
                           ],
@@ -185,20 +184,49 @@ class _ScanQrisPage extends State<ScanQris> {
 
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
-    return QRView(
-      key: qrKey,
-      onQRViewCreated: (QRViewController controller) {
-        setState(() {
-          _controller = controller;
-        });
-        controller.scannedDataStream.listen((val) {
-          if (mounted) {
-            // print(val.code);
-            _controller!.dispose();
-            //Navigator.pop(context, val.code);
-          }
-        });
-      },
+    return ScanningEffect(
+      scanningColor: const Color.fromARGB(255, 249, 118, 6),
+      child: QRView(
+        key: qrKey,
+        onQRViewCreated: (QRViewController controller) {
+          setState(() {
+            _controller = controller;
+          });
+          controller.scannedDataStream.listen((val) {
+            if (mounted) {
+              if (val.code != null) {
+                _controller!.dispose();
+                // ResultScan result = ResultScan.fromJson(
+                //     jsonDecode(val.code ?? '') as Map<String, dynamic>);
+
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 600),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      var begin = const Offset(0.0, 1.0);
+                      var end = Offset.zero;
+                      var curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const NewPage(),
+                  ),
+                );
+                //Navigator.pop(context, val.code);
+              }
+            }
+          }); // <-- Added missing semicolon here
+        },
+      ),
     );
   }
 

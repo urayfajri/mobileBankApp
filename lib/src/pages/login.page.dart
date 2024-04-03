@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 100),
+              margin: const EdgeInsets.symmetric(vertical: 80),
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
