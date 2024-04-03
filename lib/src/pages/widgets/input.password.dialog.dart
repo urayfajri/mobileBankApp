@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/logic/secure.storage.service.dart';
-import 'package:mobile_bank_app/src/pages/menu.page.dart';
+import 'package:mobile_bank_app/src/pages/home.page.dart';
+import 'package:mobile_bank_app/src/pages/navigation.dart';
 import 'package:page_transition/page_transition.dart';
 
 class InputPasswordDialog extends StatefulWidget {
@@ -121,7 +122,7 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                         PageTransition(
                           type: PageTransitionType.leftToRight,
                           duration: const Duration(milliseconds: 400),
-                          child: const MenuPage(),
+                          child: const NavigationPage(),
                           curve: Curves.easeInOut,
                         ),
                       );
