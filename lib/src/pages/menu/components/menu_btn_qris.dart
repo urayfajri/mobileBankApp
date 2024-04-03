@@ -15,6 +15,7 @@ class QrisFloatingButton extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: FloatingActionButton(
+        heroTag: "BtnQRIS",
         elevation: 0,
         onPressed: () => {
           onItemTapped(2),

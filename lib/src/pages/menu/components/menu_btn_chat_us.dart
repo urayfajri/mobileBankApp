@@ -14,6 +14,7 @@ class ChatUsFloatingButton extends StatelessWidget {
         height: 60,
         child: FittedBox(
           child: FloatingActionButton(
+            heroTag: "BtnChatUs",
             backgroundColor: Colors.blue,
             elevation: 0,
             onPressed: () {

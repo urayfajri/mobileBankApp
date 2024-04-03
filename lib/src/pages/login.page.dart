@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/widgets/btn_chat_us.dart';
+import 'package:mobile_bank_app/src/widgets/btn_menu_login.dart';
+import 'package:mobile_bank_app/src/widgets/pop_up_login.dart';
+// import 'package:mobile_bank_app/src/widgets/pop_up_login.dart';
+// import 'package:mobile_bank_app/src/widgets/popup_login.dart';
+import 'package:mobile_bank_app/src/widgets/popup_top.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.title});
@@ -10,40 +16,68 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  late bool isAlertTop;
+  @override
+  void initState() {
+    super.initState();
+    isAlertTop = true;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            AnimatedOpacity(
+              duration: const Duration(
+                  milliseconds: 500), // Durasi animasi (misalnya 500 milidetik)
+              opacity: isAlertTop
+                  ? 1.0
+                  : 0.0, // Atur opacity berdasarkan nilai isAlertTop
+              child: PopUpTop(
+                onCancel: () {
+                  setState(() {
+                    isAlertTop = false;
+                  });
+                },
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 100),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/images/logo_bni.png',
+                          width: 200,
+                        ),
+                        const SizedBox(height: 30),
+                        const PopUpFormLogin(),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        const BtnMenuLogin()
+                      ]),
+                ),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: const BottomAppBar(
+        elevation: 0, // Removes the shadow
+        color: Colors.transparent,
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [BtnChatUs()],
+        ),
+      ),
     );
   }
 }
