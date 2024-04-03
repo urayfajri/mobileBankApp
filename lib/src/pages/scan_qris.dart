@@ -4,8 +4,8 @@ import 'dart:io';
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/pages/payment/qrisPayment/qris_payment_page.dart';
 // import 'package:flutter/widgets.dart';
-import 'package:mobile_bank_app/src/pages/test_page.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:scanning_effect/scanning_effect.dart';
@@ -218,7 +218,7 @@ class _ScanQrisPage extends State<ScanQris> {
                       );
                     },
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const NewPage(),
+                        const QrisPaymentPage(),
                   ),
                 );
                 //Navigator.pop(context, val.code);

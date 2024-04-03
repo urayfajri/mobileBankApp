@@ -35,10 +35,10 @@ class HomeBtnMenuCard extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         Text(
           text,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 12),
           textAlign: TextAlign.center,
         )
       ],

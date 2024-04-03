@@ -4,6 +4,7 @@ import 'package:mobile_bank_app/src/pages/login.page.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_chat_us.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_bottom_bar.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_qris.dart';
+import 'package:mobile_bank_app/src/pages/scan_qris.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -21,6 +22,7 @@ class MenuState extends State<Menu> {
       iconData: Icons.article,
       text: "Transaction",
     ),
+    // QrisPaymentPage(),
     Pages(
       iconData: Icons.qr_code,
       text: "QRIS",
@@ -33,9 +35,18 @@ class MenuState extends State<Menu> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ScanQris(),
+        ),
+      );
+    } else {
+      setState(() {
+        selectedIndex = index;
+      });
+    }
   }
 
   @override
@@ -43,40 +54,6 @@ class MenuState extends State<Menu> {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text('BNI'),
-          centerTitle: false,
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              print("item Pressed");
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.notifications_none,
-                color: Colors.orange,
-                size: 35,
-              ),
-              onPressed: () {
-                print("item Pressed");
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.orange,
-                size: 35,
-              ),
-              onPressed: () {
-                print("item Pressed");
-              },
-            ),
-          ],
-        ),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -92,7 +69,7 @@ class MenuState extends State<Menu> {
           children: [
             const ChatUsFloatingButton(),
             Positioned(
-              bottom: 30.0,
+              bottom: 30,
               right: MediaQuery.of(context).size.width / 2 - 37,
               child: QrisFloatingButton(onItemTapped: _onItemTapped),
             ),
@@ -148,7 +125,7 @@ class SettingPage extends StatelessWidget {
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) =>
-                    const LoginPage(title: ""),
+                    const LoginPage(),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
                   return FadeTransition(

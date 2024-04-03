@@ -7,9 +7,7 @@ import 'package:mobile_bank_app/src/widgets/pop_up_login.dart';
 import 'package:mobile_bank_app/src/widgets/popup_top.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
-
-  final String title;
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
