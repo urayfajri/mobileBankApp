@@ -3,7 +3,9 @@ import 'package:mobile_bank_app/src/pages/widgets/input.password.dialog.dart';
 import 'package:mobile_bank_app/src/pages/widgets/login.menu.list.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({super.key, required this.title});
+
+  final String title;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -22,49 +24,64 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                  'https://ik.imagekit.io/fdu5ptj23co/Desain%20tanpa%20judul%20(2)%20(1)_XFkXrqPEd.png'),
-              fit: BoxFit.fill,
-            ),
+      body: Column(
+        children: [
+          const Flexible(
+            flex: 10,
+            child: Text('test'),
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(height: 550),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    _showBlurDialog(context);
-                  },
-                  icon: const Icon(Icons.face),
-                  label: const Text('Login'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    elevation: 10,
-                    shadowColor: const Color.fromARGB(255, 243, 244, 245)
-                        .withOpacity(0.1),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Flexible(
+            flex: 80,
+            child: SingleChildScrollView(
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        'https://ik.imagekit.io/fdu5ptj23co/Desain%20tanpa%20judul%20(2)%20(1)_XFkXrqPEd.png'),
+                    fit: BoxFit.fill,
                   ),
                 ),
-                const SizedBox(height: 30),
-                const MenuIcons(),
-              ],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 550),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          _showBlurDialog(context);
+                        },
+                        icon: const Icon(Icons.face),
+                        label: const Text('Login'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          elevation: 10,
+                          shadowColor: const Color.fromARGB(255, 243, 244, 245)
+                              .withOpacity(0.1),
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const MenuIcons(),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          const Flexible(
+            flex: 10,
+            child: Text('test'),
+          ),
+        ],
       ),
     );
   }
@@ -79,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _showBottomModal(BuildContext context) {
+  void _showBottomModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       barrierColor: Colors.transparent,

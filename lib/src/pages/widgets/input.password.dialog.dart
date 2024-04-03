@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/logic/secure.storage.service.dart';
+import 'package:mobile_bank_app/src/pages/menu.page.dart';
+import 'package:page_transition/page_transition.dart';
 
 class InputPasswordDialog extends StatefulWidget {
   const InputPasswordDialog({super.key});
@@ -12,6 +15,26 @@ class InputPasswordDialog extends StatefulWidget {
 
 class _InputPasswordDialogState extends State<InputPasswordDialog> {
   bool _isPasswordVisible = false;
+  late TextEditingController _controllerPassword;
+  final storage = SecureStorage();
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerPassword = TextEditingController();
+    _loadPasswordFromStorage();
+  }
+
+  Future<void> _loadPasswordFromStorage() async {
+    String? storageValue = await storage.readData('password');
+    setState(() {
+      if (storageValue != null) {
+        _controllerPassword.text = storageValue;
+      } else {
+        storage.writeData('password', '');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +82,9 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                       ],
                     ),
                     child: TextField(
+                      controller: _controllerPassword,
                       onChanged: (value) {
-                        print(value);
+                        storage.updateData('password', value);
                       },
                       obscureText: !_isPasswordVisible,
                       decoration: InputDecoration(
@@ -92,7 +116,15 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          duration: const Duration(milliseconds: 400),
+                          child: const MenuPage(),
+                          curve: Curves.easeInOut,
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
