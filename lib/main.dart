@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bank_app/src/pages/scan.page.dart';
+import 'package:mobile_bank_app/src/pages/login.page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ScanPage(),
+      home: const LoginPage(),
     );
   }
 }
