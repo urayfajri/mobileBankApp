@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQris extends StatefulWidget {
@@ -15,6 +16,8 @@ class ScanQris extends StatefulWidget {
 class _ScanQrisPage extends State<ScanQris> {
   Barcode? result;
   QRViewController? controller;
+  QRViewController? _controller;
+
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   // In order to get hot reload to work we need to pause the camera if the platform
@@ -31,92 +34,69 @@ class _ScanQrisPage extends State<ScanQris> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
+          _buildQrView(context),
+          Positioned(
+            bottom: 10,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if (result != null)
-                    Text(
-                        // ignore: deprecated_member_use
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    const Text('Scan a code'),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
-                              },
-                            )),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/logo_qris.png',
+                        width: 80,
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.flipCamera();
-                              setState(() {});
+                      InkWell(
+                        onTap: () async {
+                          await _controller?.toggleFlash();
+                          setState(() {});
+                        },
+                        borderRadius: BorderRadius.circular(
+                            30.0), // Mengatur sudut menjadi full rounded
+                        child: Container(
+                          padding: const EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white, // Warna background button
+                            borderRadius: BorderRadius.circular(
+                                30.0), // Mengatur sudut menjadi full rounded
+                          ),
+                          child: FutureBuilder(
+                            future: _controller?.getFlashStatus(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return Icon(
+                                  snapshot.data == true
+                                      ? Icons.flash_on
+                                      : Icons.flash_off,
+                                  color: Colors.orange,
+                                  size: 18.0,
+                                );
+                              }
                             },
-                            child: FutureBuilder(
-                              future: controller?.getCameraInfo(),
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  return Text(
-                                      // ignore: deprecated_member_use
-                                      'Camera facing ${describeEnum(snapshot.data!)}');
-                                } else {
-                                  return const Text('loading');
-                                }
-                              },
-                            )),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.pauseCamera();
-                          },
-                          child: const Text('pause',
-                              style: TextStyle(fontSize: 20)),
+                          ),
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await controller?.resumeCamera();
-                          },
-                          child: const Text('resume',
-                              style: TextStyle(fontSize: 20)),
-                        ),
-                      )
                     ],
                   ),
+                  const BtnMenuQris()
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -124,22 +104,23 @@ class _ScanQrisPage extends State<ScanQris> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
+
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
-      onQRViewCreated: _onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-          borderColor: Colors.red,
-          borderRadius: 10,
-          borderLength: 30,
-          borderWidth: 10,
-          cutOutSize: scanArea),
-      onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
+      onQRViewCreated: (QRViewController controller) {
+        setState(() {
+          _controller = controller;
+        });
+        controller.scannedDataStream.listen((val) {
+          if (mounted) {
+            // print(val.code);
+            _controller!.dispose();
+            //Navigator.pop(context, val.code);
+          }
+        });
+      },
     );
   }
 

@@ -30,8 +30,12 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Visibility(
-              visible: isAlertTop,
+            AnimatedOpacity(
+              duration: const Duration(
+                  milliseconds: 500), // Durasi animasi (misalnya 500 milidetik)
+              opacity: isAlertTop
+                  ? 1.0
+                  : 0.0, // Atur opacity berdasarkan nilai isAlertTop
               child: PopUpTop(
                 onCancel: () {
                   setState(() {

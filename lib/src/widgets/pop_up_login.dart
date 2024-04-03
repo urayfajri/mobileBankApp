@@ -44,16 +44,18 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
                   obscureText: _isObscured,
                   decoration: InputDecoration(
                     labelText: 'MPIN',
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isObscured = !_isObscured;
-                          print(_isObscured);
-                        });
+                    suffixIcon: IconButton(
+                      icon: Icon(_isObscured
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            _isObscured = !_isObscured;
+                            print(_isObscured);
+                          },
+                        );
                       },
-                      child: Icon(
-                        _isObscured ? Icons.visibility : Icons.visibility_off,
-                      ),
                     ),
                   ),
                 ),

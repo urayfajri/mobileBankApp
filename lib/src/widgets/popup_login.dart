@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/widgets/btn_login.dart';
 
-class PopupLogin extends StatelessWidget {
+class PopupLogin extends StatefulWidget {
   const PopupLogin({super.key});
 
+  @override
+  State<PopupLogin> createState() => _PopupLoginState();
+}
+
+class _PopupLoginState extends State<PopupLogin> {
+  bool _isObscured = false;
   @override
   Widget build(BuildContext context) {
     TextEditingController userIdController = TextEditingController();
@@ -47,14 +53,20 @@ class PopupLogin extends StatelessWidget {
               const SizedBox(height: 16),
               TextField(
                 controller: pinController,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _isObscured,
+                decoration: InputDecoration(
                   labelText: 'MPIN',
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscured ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _isObscured = !_isObscured;
+                          print(_isObscured);
+                        },
+                      );
+                    },
                   ),
                 ),
               ),
