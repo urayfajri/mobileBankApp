@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bank_app/src/pages/home/home.dart';
+import 'package:mobile_bank_app/src/pages/menu/menu.dart';
 // import 'package:mobile_bank_app/src/pages/test_page.dart';
 import 'package:mobile_bank_app/src/widgets/btn_login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -110,7 +110,7 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
                         );
                       },
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const Home(),
+                          const Menu(),
                     ),
                   );
                 },
@@ -123,6 +123,7 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
       },
       style: ElevatedButton.styleFrom(
         elevation: 0,
+        foregroundColor: Colors.white,
       ),
       child: const BtnLogin(),
     );
