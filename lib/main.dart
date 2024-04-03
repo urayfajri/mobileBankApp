@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/login.page.dart';
+import 'package:mobile_bank_app/src/providers/home_edit_menu.provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeEditMenuProvider())
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +26,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const LoginPage(title: 'Flutter Demo Home Page'),
+      home: const LoginPage(
+        title: "",
+      ),
     );
   }
 }

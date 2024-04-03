@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bank_app/src/pages/test_page.dart';
+import 'package:mobile_bank_app/src/pages/home/home.dart';
+// import 'package:mobile_bank_app/src/pages/test_page.dart';
 import 'package:mobile_bank_app/src/widgets/btn_login.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -109,7 +110,7 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
                         );
                       },
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const NewPage(),
+                          const Home(),
                     ),
                   );
                 },
