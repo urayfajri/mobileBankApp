@@ -13,6 +13,7 @@ class PopUpFormLogin extends StatefulWidget {
 
 class _PopUpFormLoginState extends State<PopUpFormLogin> {
   bool _isObscured = false;
+  bool isChecked = true;
 // Changed to false
 
   @override
@@ -21,70 +22,100 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
       onPressed: () {
         Alert(
             style: AlertStyle(
+              overlayColor: Colors.black45,
+              animationType: AnimationType.grow,
+              backgroundColor: Colors.white,
               alertBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
             context: context,
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
-                  'Selamat datang kembali,',
-                  style: TextStyle(
-                      color: Colors.black45,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                const TextField(
-                  decoration: InputDecoration(
-                    labelText: 'User ID',
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 300,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  const Text(
+                    'Selamat datang kembali,',
+                    style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-                TextField(
-                  obscureText: _isObscured,
-                  decoration: InputDecoration(
-                    labelText: 'MPIN',
-                    suffixIcon: IconButton(
-                      icon: Icon(_isObscured
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        setState(
-                          () {
-                            _isObscured = !_isObscured;
-                            print(_isObscured);
-                          },
-                        );
-                      },
+                  const TextField(
+                    decoration: InputDecoration(
+                      labelText: 'User ID',
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Lupa User ID?',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 69, 88),
-                        fontSize: 12,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Color.fromARGB(255, 0, 69, 88),
+                  TextField(
+                    obscureText: _isObscured,
+                    decoration: InputDecoration(
+                      labelText: 'MPIN',
+                      suffixIcon: IconButton(
+                        icon: Icon(_isObscured
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(
+                            () {
+                              _isObscured = !_isObscured;
+                              print(_isObscured);
+                            },
+                          );
+                        },
                       ),
                     ),
-                    Text(
-                      'Lupa MPIN?',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 69, 88),
-                        fontSize: 12,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Color.fromARGB(255, 0, 69, 88),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: true, // atau false tergantung kebutuhan Anda
+                        onChanged: (bool? value) {
+                          // Logika ketika checkbox diubah
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              1), // Anda bisa menyesuaikan nilai ini
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const Text(
+                        'Simpan User ID',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Lupa User ID?',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 0, 69, 88),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color.fromARGB(255, 0, 69, 88),
+                        ),
+                      ),
+                      Text(
+                        'Lupa MPIN?',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 0, 69, 88),
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color.fromARGB(255, 0, 69, 88),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             buttons: [
               DialogButton(
