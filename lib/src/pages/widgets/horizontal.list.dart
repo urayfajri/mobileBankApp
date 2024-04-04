@@ -14,42 +14,42 @@ class HorizontalList extends StatefulWidget {
 class _HorizontalListState extends State<HorizontalList> {
   List<Map<String, dynamic>> dataList = [
     {
-      'iconData': Icons.attach_money,
-      'label': 'e-money',
-      'iconBackgroundColor': Colors.orange,
+      'iconData': Icons.payments_outlined,
+      'label': 'Transfer',
+      'iconBackgroundColor': Colors.greenAccent,
     },
     {
-      'iconData': Icons.qr_code_scanner,
-      'label': 'QR Terima Transfer',
-      'iconBackgroundColor': Colors.blue,
+      'iconData': Icons.receipt_long_outlined,
+      'label': 'Bayar',
+      'iconBackgroundColor': Colors.lightBlueAccent,
     },
     {
-      'iconData': Icons.attach_money,
-      'label': 'e-money',
-      'iconBackgroundColor': Colors.orange,
-    },
-    {
-      'iconData': Icons.qr_code_scanner,
-      'label': 'QR Terima Transfer',
-      'iconBackgroundColor': Colors.blue,
+      'iconData': Icons.send_to_mobile_sharp,
+      'label': 'Top-up',
+      'iconBackgroundColor': Color.fromARGB(151, 37, 153, 43),
     },
     {
       'iconData': Icons.attach_money,
       'label': 'e-money',
-      'iconBackgroundColor': Colors.orange,
+      'iconBackgroundColor': Colors.orangeAccent,
+    },
+    {
+      'iconData': Icons.shopping_bag_outlined,
+      'label': 'Sukha',
+      'iconBackgroundColor': Colors.purpleAccent,
     },
     {
       'iconData': Icons.qr_code_scanner,
-      'label': 'QR Terima Transfer',
+      'label': 'Scan QR',
       'iconBackgroundColor': Colors.blue,
     },
   ];
 
   List<Map<String, dynamic>> dataList2 = [
     {
-      'iconData': Icons.attach_money,
-      'label': 'Test',
-      'iconBackgroundColor': Colors.orange,
+      'iconData': Icons.settings_backup_restore_rounded,
+      'label': 'Valas',
+      'iconBackgroundColor': Colors.green[200],
     },
     {
       'iconData': Icons.qr_code_scanner,
@@ -57,24 +57,24 @@ class _HorizontalListState extends State<HorizontalList> {
       'iconBackgroundColor': Colors.blue,
     },
     {
-      'iconData': Icons.attach_money,
-      'label': 'e-money',
-      'iconBackgroundColor': Colors.orange,
+      'iconData': Icons.qr_code_2_sharp,
+      'label': 'QR Bayar',
+      'iconBackgroundColor': Colors.blue[400],
     },
     {
-      'iconData': Icons.qr_code_scanner,
-      'label': 'QR Terima Transfer',
-      'iconBackgroundColor': Colors.blue,
+      'iconData': Icons.trending_up_rounded,
+      'label': 'Investasi',
+      'iconBackgroundColor': Color.fromARGB(255, 100, 209, 85),
     },
     {
-      'iconData': Icons.attach_money,
-      'label': 'e-money',
-      'iconBackgroundColor': Colors.orange,
+      'iconData': Icons.swipe_up_alt_sharp,
+      'label': 'Setor Tarik',
+      'iconBackgroundColor': Color.fromARGB(255, 241, 120, 235),
     },
     {
-      'iconData': Icons.qr_code_scanner,
-      'label': 'QR Terima Transfer',
-      'iconBackgroundColor': Colors.blue,
+      'iconData': Icons.access_alarms_sharp,
+      'label': 'Tagihan',
+      'iconBackgroundColor': Colors.brown[400],
     },
   ];
 
