@@ -1,22 +1,22 @@
-class ResultScan {
+class ResultScanModel {
   final String name;
   final String city;
   final String kodepan;
 
-  const ResultScan({
+  const ResultScanModel({
     required this.name,
     required this.city,
     required this.kodepan,
   });
 
-  factory ResultScan.fromJson(Map<String, dynamic> json) {
+  factory ResultScanModel.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
         'kodepan': String kodepan,
         'name': String name,
         'city': String city,
       } =>
-        ResultScan(
+        ResultScanModel(
           kodepan: kodepan,
           name: name,
           city: city,

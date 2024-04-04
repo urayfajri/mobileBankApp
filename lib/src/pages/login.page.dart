@@ -25,46 +25,57 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AnimatedOpacity(
-              duration: const Duration(
-                  milliseconds: 500), // Durasi animasi (misalnya 500 milidetik)
-              opacity: isAlertTop
-                  ? 1.0
-                  : 0.0, // Atur opacity berdasarkan nilai isAlertTop
-              child: PopUpTop(
-                onCancel: () {
-                  setState(() {
-                    isAlertTop = false;
-                  });
-                },
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 80),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/images/logo_bni.png',
-                          width: 200,
-                        ),
-                        const SizedBox(height: 30),
-                        const PopUpFormLogin(),
-                        const SizedBox(
-                          height: 14,
-                        ),
-                        const BtnMenuLogin()
-                      ]),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            stops: [0.21, 0.53],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [Color(0x7FFFFFFF), Color(0xFFE5F6F7)],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AnimatedOpacity(
+                duration: const Duration(
+                    milliseconds:
+                        500), // Durasi animasi (misalnya 500 milidetik)
+                opacity: isAlertTop
+                    ? 1.0
+                    : 0.0, // Atur opacity berdasarkan nilai isAlertTop
+                child: PopUpTop(
+                  onCancel: () {
+                    setState(() {
+                      isAlertTop = false;
+                    });
+                  },
                 ),
               ),
-            ),
-          ],
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 80),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/logo_bni.png',
+                            width: 200,
+                          ),
+                          const SizedBox(height: 30),
+                          const PopUpFormLogin(),
+                          const SizedBox(
+                            height: 14,
+                          ),
+                          const BtnMenuLogin()
+                        ]),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: const BottomAppBar(

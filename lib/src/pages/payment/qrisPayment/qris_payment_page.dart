@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/models/result_scan_model.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/components/qris_payment_app_bar.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/components/qris_payment_bottom_app_bar.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/components/qris_payment_input.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/components/qris_payment_source_of_fund.dart';
 
 class QrisPaymentPage extends StatelessWidget {
-  const QrisPaymentPage({super.key});
+  final ResultScanModel resulScanQris;
+  const QrisPaymentPage({super.key, required this.resulScanQris});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: QrisPaymentAppBar(),
+    return Scaffold(
+      appBar: const QrisPaymentAppBar(),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: DefaultTextStyle(
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             color: Colors.black,
           ),
           child: Column(
             children: [
-              _MerchantInformation(),
-              SizedBox(height: 30),
-              QrisPaymentSourceOfFund(),
-              SizedBox(height: 10),
-              QrisPaymentInput()
+              _MerchantInformation(resulScanQris: resulScanQris),
+              const SizedBox(height: 30),
+              const QrisPaymentSourceOfFund(),
+              const SizedBox(height: 10),
+              const QrisPaymentInput()
             ],
           ),
         ),
       ),
-      bottomNavigationBar: QrisPaymentBottomAppBar(),
+      bottomNavigationBar: const QrisPaymentBottomAppBar(),
     );
   }
 }
 
 class _MerchantInformation extends StatelessWidget {
-  const _MerchantInformation();
+  final ResultScanModel resulScanQris;
+  const _MerchantInformation({required this.resulScanQris});
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +66,21 @@ class _MerchantInformation extends StatelessWidget {
                   ),
                 ],
                 borderRadius: BorderRadius.all(Radius.circular(10))),
-            child: const Column(
+            child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Nama Merchant"),
-                    Text("Kantin Ibu Lilik"),
+                    const Text("Nama Merchant"),
+                    Text(resulScanQris.name),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Lokasi Merchant"),
-                    Text("Jakarta Pusat"),
+                    const Text("Lokasi Merchant"),
+                    Text(resulScanQris.city),
                   ],
                 )
               ],

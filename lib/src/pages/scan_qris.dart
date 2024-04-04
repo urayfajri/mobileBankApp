@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/models/result_scan_model.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/qris_payment_page.dart';
 // import 'package:flutter/widgets.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
@@ -43,29 +45,28 @@ class _ScanQrisPage extends State<ScanQris> {
           color: Colors.black54,
         ),
         backgroundColor: Colors.white,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(),
-            Expanded(
-              flex: 1,
-              child: Text(
-                'Scan QR',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-            Icon(
-              Icons.house,
-              color: Color.fromARGB(255, 255, 142, 44),
-              size: 24,
-            ),
-          ],
+        elevation: 0,
+        title: const Text(
+          'Scan QR',
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 18.0,
+            color: Colors.black87,
+          ),
         ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.house,
+              color: Colors.orange,
+              size: 30,
+            ),
+            onPressed: () {
+              print("item Pressed");
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -89,7 +90,7 @@ class _ScanQrisPage extends State<ScanQris> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -196,8 +197,8 @@ class _ScanQrisPage extends State<ScanQris> {
             if (mounted) {
               if (val.code != null) {
                 _controller!.dispose();
-                // ResultScan result = ResultScan.fromJson(
-                //     jsonDecode(val.code ?? '') as Map<String, dynamic>);
+                ResultScanModel result = ResultScanModel.fromJson(
+                    jsonDecode(val.code ?? '') as Map<String, dynamic>);
 
                 Navigator.push(
                   context,
@@ -218,7 +219,9 @@ class _ScanQrisPage extends State<ScanQris> {
                       );
                     },
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const QrisPaymentPage(),
+                        QrisPaymentPage(
+                      resulScanQris: result,
+                    ),
                   ),
                 );
                 //Navigator.pop(context, val.code);

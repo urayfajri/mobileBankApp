@@ -38,6 +38,7 @@ dependencies:
   reorderable_grid_view: ^2.2.8
   provider: ^6.1.2
   scanning_effect: ^1.0.4
+  getwidget: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
   assets:
     - assets/images/logo_bni.png
     - assets/images/logo_qris.png
+    - assets/images/face_id_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
