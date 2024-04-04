@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/logic/secure.storage.service.dart';
-import 'package:mobile_bank_app/src/pages/home.page.dart';
 import 'package:mobile_bank_app/src/pages/navigation.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -130,8 +129,7 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 136, vertical: 15),
+                      minimumSize: const Size.fromHeight(50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),

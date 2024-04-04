@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/scan.page.dart';
+import 'package:mobile_bank_app/src/pages/widgets/menu.icon.dart';
 
 class MenuIcons extends StatefulWidget {
   const MenuIcons({super.key});
@@ -17,9 +18,15 @@ class _MenuIconsState extends State<MenuIcons> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _buildMenuIcon(Icons.attach_money, 'e-money', Colors.orange),
+          const CustomIconBox(
+              iconData: Icons.attach_money,
+              label: 'e-money',
+              iconBackgroundColor: Colors.orange),
           const SizedBox(width: 10),
-          _buildMenuIcon(Icons.flash_on_outlined, 'Quick Pick', Colors.yellow),
+          const CustomIconBox(
+              iconData: Icons.flash_off_outlined,
+              label: 'Quick Pick',
+              iconBackgroundColor: Colors.yellow),
           const SizedBox(width: 10),
           TextButton(
             onPressed: () {
@@ -32,7 +39,6 @@ class _MenuIconsState extends State<MenuIcons> {
                       var begin = const Offset(0.0, 1.0);
                       var end = Offset.zero;
                       var curve = Curves.ease;
-
                       var tween = Tween(begin: begin, end: end)
                           .chain(CurveTween(curve: curve));
 
@@ -49,45 +55,23 @@ class _MenuIconsState extends State<MenuIcons> {
               padding: EdgeInsets.zero,
               minimumSize: Size.zero,
             ),
-            child: _buildMenuIcon(
-                Icons.qr_code_2_outlined, 'QR Bayar', Colors.blueAccent),
+            child: const CustomIconBox(
+                iconData: Icons.qr_code_2_outlined,
+                label: 'QR Bayarr',
+                iconBackgroundColor: Colors.lightBlueAccent),
           ),
           const SizedBox(width: 10),
-          _buildMenuIcon(
-              Icons.qr_code_scanner, 'QR Terima Transfer', Colors.blue),
+          const CustomIconBox(
+              iconData: Icons.qr_code_scanner,
+              label: 'QR Terima Transfer',
+              iconBackgroundColor: Colors.blue),
           const SizedBox(width: 10),
-          _buildMenuIcon(Icons.money_outlined, 'Setor Tarik', Colors.purple),
+          const CustomIconBox(
+              iconData: Icons.money_outlined,
+              label: 'Setor Tarik',
+              iconBackgroundColor: Colors.purple),
         ],
       ),
-    );
-  }
-
-  Widget _buildMenuIcon(
-      IconData iconData, String label, Color iconBackgroundColor) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            color: iconBackgroundColor,
-            shape: BoxShape.circle,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Icon(iconData, size: 30, color: Colors.white),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Container(
-          constraints: const BoxConstraints(maxWidth: 60, minWidth: 60),
-          height: 60,
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
-          ),
-        ),
-      ],
     );
   }
 }
