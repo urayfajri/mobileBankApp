@@ -30,8 +30,8 @@ class BottomNavBar extends StatelessWidget {
         showUnselectedLabels: true,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontSize: 16),
-        unselectedLabelStyle: const TextStyle(fontSize: 16),
+        selectedLabelStyle: const TextStyle(fontSize: 13),
+        unselectedLabelStyle: const TextStyle(fontSize: 13),
         iconSize: 35,
         items: const [
           BottomNavigationBarItem(
@@ -43,8 +43,8 @@ class BottomNavBar extends StatelessWidget {
             label: 'Riwayat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: "QRIS",
+            icon: Icon(null),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star_outline),

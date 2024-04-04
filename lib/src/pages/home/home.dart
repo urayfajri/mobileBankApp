@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/home/components/home_action_menu.dart';
 import 'package:mobile_bank_app/src/pages/home/components/home_ads.dart';
+import 'package:mobile_bank_app/src/pages/home/components/home_appbar_notification.dart';
 import 'package:mobile_bank_app/src/pages/home/components/home_btn_logout.dart';
 import 'package:mobile_bank_app/src/pages/home/components/home_user_balance.dart';
 import 'package:mobile_bank_app/src/pages/home/components/home_user_info.dart';
@@ -14,26 +15,16 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text('BNI'),
-        centerTitle: false,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            print("item Pressed");
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.notifications_none,
-              color: Colors.orange,
-              size: 35,
-            ),
-            onPressed: () {
-              print("item Pressed");
-            },
+        leadingWidth: 125,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Image.asset(
+            'assets/images/logo_bni.png',
           ),
-          const HomeBtnLogout(),
+        ),
+        actions: const [
+          AppBarNotificationIcon(),
+          HomeBtnLogout(),
         ],
       ),
       body: const SingleChildScrollView(
@@ -41,7 +32,7 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: Column(
                 children: [
                   UserAccountInfo(),

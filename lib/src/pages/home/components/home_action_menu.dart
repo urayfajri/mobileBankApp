@@ -25,7 +25,10 @@ class _ListActionButton extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [_UserPointInfo(), _BtnEditMenu()],
+        children: [
+          _UserPointInfo(),
+          _BtnEditMenu(),
+        ],
       ),
     );
   }
@@ -37,7 +40,7 @@ class _UserPointInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
         border: Border.all(
             width: 2, color: const Color.fromARGB(255, 211, 211, 211)),
@@ -49,14 +52,14 @@ class _UserPointInfo extends StatelessWidget {
             "Poin",
             style: TextStyle(
               color: Colors.orange,
-              fontSize: 17,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(width: 10),
           Text(
             "0",
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -73,6 +76,7 @@ class _BtnEditMenu extends StatelessWidget {
       builder: (context, provider, child) {
         return ElevatedButton(
           style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -88,15 +92,16 @@ class _BtnEditMenu extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.edit,
+                Icons.edit_outlined,
                 color: provider.editMenu ? Colors.green : Colors.orange,
+                size: 15,
               ),
               const SizedBox(width: 10),
               Text(
                 "Atur Menu",
                 style: TextStyle(
                   color: provider.editMenu ? Colors.green : Colors.orange,
-                  fontSize: 17,
+                  fontSize: 15,
                 ),
               ),
             ],

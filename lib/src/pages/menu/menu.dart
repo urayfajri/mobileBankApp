@@ -69,8 +69,9 @@ class MenuState extends State<Menu> {
           children: [
             const ChatUsFloatingButton(),
             Positioned(
-              bottom: 30,
+              bottom: 25,
               right: MediaQuery.of(context).size.width / 2 - 40,
+              left: MediaQuery.of(context).size.width / 2 - 40,
               child: QrisFloatingButton(onItemTapped: _onItemTapped),
             ),
           ],
