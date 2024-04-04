@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Container(
-          height: 1200, // Adjust height as needed
           decoration: BoxDecoration(color: Colors.grey[100]),
           alignment: Alignment.center,
           child: Column(
