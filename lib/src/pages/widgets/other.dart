@@ -9,14 +9,6 @@ class Other extends StatefulWidget {
 }
 
 class _OtherState extends State<Other> {
-  bool _isBalanceVisible = false;
-
-  void _toggleVisibility() {
-    setState(() {
-      _isBalanceVisible = !_isBalanceVisible;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
