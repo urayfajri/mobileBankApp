@@ -69,10 +69,10 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: _showScrollButton
           ? Padding(
-              padding: const EdgeInsets.only(bottom: 15), // Add bottom padding
+              padding: const EdgeInsets.only(bottom: 15),
               child: SizedBox(
-                width: 200, // Set width according to your requirement
-                height: 40, // Set height according to your requirement
+                width: 200,
+                height: 40,
                 child: FloatingActionButton(
                   onPressed: () {
                     _scrollController.animateTo(
@@ -81,19 +81,19 @@ class _HomePageState extends State<HomePage> {
                       curve: Curves.easeInOut,
                     );
                   },
-                  backgroundColor: Colors.white, // Set button color to white
+                  backgroundColor: Colors.white,
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        Icons.arrow_downward, // Add arrow down icon
-                        color: Colors.blue, // Set icon color
+                        Icons.arrow_downward,
+                        color: Colors.blue,
                       ),
-                      SizedBox(width: 8), // Add spacing between icon and text
+                      SizedBox(width: 8),
                       Text(
-                        'Buka Produk Lainnya', // Add text
+                        'Buka Produk Lainnya',
                         style: TextStyle(
-                          color: Colors.blue, // Set text color
+                          color: Colors.blue,
                         ),
                       ),
                     ],
