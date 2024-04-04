@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_bank_app/src/models/result_scan.model.dart';
 
@@ -18,18 +19,24 @@ class TransactionPage extends StatefulWidget {
 
 class _TransactionPageState extends State<TransactionPage> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   final ResultScan resultScan;
+
+  final FocusNode _focusNode = FocusNode();
 
   String _inputNominalTransaction = '';
   bool _isCreditCardBalanceClicked = false;
-  bool _isSavingClicked = false;
+  bool _isSavingClicked = true;
 
   _TransactionPageState({required this.resultScan});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+        ),
         body: Container(
           color: const Color.fromARGB(255, 243, 243, 243),
           child: Column(
@@ -99,16 +106,23 @@ class _TransactionPageState extends State<TransactionPage> {
                         padding: const EdgeInsets.only(
                             right: 24, left: 24, bottom: 32),
                         child: TextField(
+                            focusNode: _focusNode,
+                            autofocus: true, // Set autofocus
                             controller: _controller,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                               CurrencyInputFormatter(),
                             ],
-                            onChanged: (value) {
+                            onSubmitted: (value) {
+                              // Handle the submitted value here
                               setState(() {
                                 _inputNominalTransaction = value;
                               });
+
+                              if (value.length > 4) {
+                                _showBlurDialog(context);
+                              }
                             },
                             //editing controller of this TextField
                             style: const TextStyle(
@@ -150,7 +164,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 height: 24,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -169,6 +183,13 @@ class _TransactionPageState extends State<TransactionPage> {
                             setState(() {
                               _isSavingClicked = false;
                               _isCreditCardBalanceClicked = true;
+                              _scrollController.animateTo(
+                                0.0, // Scroll position to animate to, in this case, the top (0.0)
+                                duration: const Duration(
+                                    milliseconds:
+                                        500), // Duration of the animation
+                                curve: Curves.easeInOut, // Animation curve
+                              );
                             });
                           },
                           child: Container(
@@ -207,6 +228,13 @@ class _TransactionPageState extends State<TransactionPage> {
                             setState(() {
                               _isSavingClicked = true;
                               _isCreditCardBalanceClicked = false;
+                              _scrollController.animateTo(
+                                0.0, // Scroll position to animate to, in this case, the top (0.0)
+                                duration: const Duration(
+                                    milliseconds:
+                                        500), // Duration of the animation
+                                curve: Curves.easeInOut, // Animation curve
+                              );
                             });
                           },
                           child: Container(
@@ -238,13 +266,151 @@ class _TransactionPageState extends State<TransactionPage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    _isSavingClicked
+                        ? SizedBox(
+                            height: 120,
+                            child: ListView(
+                              controller: _scrollController,
+                              // This next line does the trick.
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>[
+                                _cardBalanceInformation(
+                                    'Tabungan', 'Rp 271.000.000'),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                _cardBalanceInformation(
+                                    'Tabungan', 'Rp 271.000'),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                _cardBalanceInformation('Tabungan', 'Rp 2.710'),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                _cardBalanceInformation(
+                                    'Tabungan', 'Rp 27.100'),
+                              ],
+                            ),
+                          )
+                        : SizedBox(
+                            height: 120,
+                            child: ListView(
+                              // This next line does the trick.
+                              controller: _scrollController,
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>[
+                                _cardBalanceInformation(
+                                    'Kredit', 'Rp 100.000.000'),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                _cardBalanceInformation(
+                                    'Kredit', 'Rp 100.000.000'),
+                              ],
+                            ),
+                          ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ));
+  }
+
+  void _showBlurDialog(BuildContext context) {
+    showDialog(
+      barrierColor: Colors.black.withOpacity(0.7),
+      context: context,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            color: Colors.white,
+            child: const Text('test'),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _cardBalanceInformation(
+    String title,
+    String price,
+  ) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - 45,
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            child: Container(
+              height: 120,
+              width: 90,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      'https://ik.imagekit.io/fdu5ptj23co/000071-05_jenis-jenis-kartu-atm-mandiri_gold-gpn_800x450_ccpdm-min%20(2)_A-b415Vdu.jpg'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width - 120,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: Colors.white),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      '$title Mandiri',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(
+                            20), // Adjust the radius as needed
+                      ),
+                      child: const Padding(
+                          padding: EdgeInsets.all(2),
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 20,
+                          )),
+                    )
+                  ],
+                ),
+                const Text(
+                  '071237463527',
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                ),
+                Text(
+                  price,
+                  style: const TextStyle(fontSize: 18, color: Colors.blue),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

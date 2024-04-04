@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late String name = 'Jhon Doe Imanuel';
   late ScrollController _scrollController;
-  bool _showScrollButton = false;
+  bool _showScrollButton = true;
 
   @override
   void initState() {
