@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bank_app/src/pages/login.page.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:mobile_bank_app/src/pages/widgets/greeting.message.dart';
+import 'package:mobile_bank_app/src/pages/widgets/horizontal.list.dart';
+import 'package:mobile_bank_app/src/pages/widgets/menu.header.dart';
+import 'package:mobile_bank_app/src/pages/widgets/other.dart';
+import 'package:mobile_bank_app/src/pages/widgets/saving.deposite.dart';
+import 'package:mobile_bank_app/src/pages/widgets/simple.banner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,122 +14,95 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late String name = 'SIAPA ITU NAMANYA';
+  late String name = 'Jhon Doe Imanuel';
+  late ScrollController _scrollController;
+  bool _showScrollButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.maxScrollExtent ==
+        _scrollController.position.pixels) {
+      // If at the maximum scroll position
+      setState(() {
+        _showScrollButton = false;
+      });
+    } else {
+      setState(() {
+        _showScrollButton = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Container(
+          height: 1200, // Adjust height as needed
+          decoration: BoxDecoration(color: Colors.grey[100]),
           alignment: Alignment.center,
           child: Column(
             children: <Widget>[
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color.fromARGB(255, 223, 237, 248), Colors.white],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-                padding: const EdgeInsets.only(top: 20, left: 160, right: 160),
-                child: Image.network(
-                  'https://ik.imagekit.io/fdu5ptj23co/f132e326-9f22-4136-83f3-1712e0a223d4_DYZ8c2Are.png',
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'SELAMAT SIANG, ',
-                      style: TextStyle(color: Colors.blue[900], fontSize: 14),
-                    ),
-                    Text(
-                      '$name...!',
-                      style: TextStyle(
-                          color: Colors.blue[900],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.zero,
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color.fromARGB(255, 223, 237, 248), Colors.white],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
-                constraints: const BoxConstraints(
-                  maxWidth: 700,
-                ),
-                child: Row(children: [
-                  Image.network(
-                    'https://ik.imagekit.io/fdu5ptj23co/pngtree-jogging-clipart-cartoon-young-boy-running-in-the-fitness-vector-png-image_11068859_BfAAx_P_v.png',
-                    height: 150,
-                    width: 150,
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.zero,
-                    padding: const EdgeInsets.all(0),
-                    constraints:
-                        const BoxConstraints(minWidth: 240, minHeight: 120),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            constraints: const BoxConstraints(maxWidth: 200),
-                            child: const Text(
-                              'Mau transfer, bayar dan top up lebih cepat?',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                            )),
-                        Container(
-                            constraints: const BoxConstraints(
-                                maxWidth: 200, minWidth: 200),
-                            padding: const EdgeInsets.all(10),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Add your onPressed logic here
-                              },
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.blue, // Text color
-                              ),
-                              child: const Text('Atur Sekarang'),
-                            ))
-                      ],
-                    ),
-                  )
-                ]),
-              ),
-              Container(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: const LoginPage(),
-                    ),
-                  );
-                },
-                child: const Text('Navigate'),
-              ),
+              const HeaderImage(),
+              GreetingMessage(name: name),
+              const SimpleBanner(),
+              const HorizontalList(),
+              const SavingAndDeposite(),
+              const Other()
             ],
           ),
         ),
       ),
+      floatingActionButton: _showScrollButton
+          ? Padding(
+              padding: const EdgeInsets.only(bottom: 15), // Add bottom padding
+              child: SizedBox(
+                width: 200, // Set width according to your requirement
+                height: 40, // Set height according to your requirement
+                child: FloatingActionButton(
+                  onPressed: () {
+                    _scrollController.animateTo(
+                      _scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  backgroundColor: Colors.white, // Set button color to white
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.arrow_downward, // Add arrow down icon
+                        color: Colors.blue, // Set icon color
+                      ),
+                      SizedBox(width: 8), // Add spacing between icon and text
+                      Text(
+                        'Buka Produk Lainnya', // Add text
+                        style: TextStyle(
+                          color: Colors.blue, // Set text color
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
