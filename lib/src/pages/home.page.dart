@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: _showScrollButton
           ? Padding(
-              padding: const EdgeInsets.only(bottom: 20), // Add bottom padding
+              padding: const EdgeInsets.only(bottom: 15), // Add bottom padding
               child: SizedBox(
                 width: 200, // Set width according to your requirement
                 height: 40, // Set height according to your requirement
