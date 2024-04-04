@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/login.page.dart';
 import 'package:mobile_bank_app/src/providers/home_edit_menu.provider.dart';
+import 'package:mobile_bank_app/src/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const SplashScreen(),
     );
   }
 }

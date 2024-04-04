@@ -1,16 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:scanning_effect/scanning_effect.dart';
+import 'package:qr_code_utils/qr_code_utils.dart';
+//
 import 'package:mobile_bank_app/src/models/result_scan_model.dart';
 import 'package:mobile_bank_app/src/pages/payment/qrisPayment/qris_payment_page.dart';
 // import 'package:flutter/widgets.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_qris.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:scanning_effect/scanning_effect.dart';
 
 class ScanQris extends StatefulWidget {
   const ScanQris({super.key});
@@ -21,8 +23,12 @@ class ScanQris extends StatefulWidget {
 
 class _ScanQrisPage extends State<ScanQris> {
   Barcode? result;
+  final ImagePicker _picker = ImagePicker();
+  String? qrCodeResult;
   QRViewController? controller;
   QRViewController? _controller;
+
+  late final Logger logger;
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -37,15 +43,44 @@ class _ScanQrisPage extends State<ScanQris> {
     controller!.resumeCamera();
   }
 
+  Future<void> _scanQRFromImage() async {
+    XFile? xfile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (xfile != null) {
+      String? decoded;
+      try {
+        decoded = await QrCodeUtils.decodeFrom(xfile.path) ??
+            'Unknown platform version';
+        ResultScanModel result = ResultScanModel.fromJson(
+            jsonDecode(decoded) as Map<String, dynamic>);
+
+        // ignore: use_build_context_synchronously
+        _navigation(context, result);
+
+        qrCodeResult = decoded;
+      } on PlatformException {
+        qrCodeResult = 'Failed to get decoded.';
+      }
+    } else {
+      print('No image selected.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black54,
-        ),
         backgroundColor: Colors.white,
         elevation: 0,
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(
           'Scan QR',
           style: TextStyle(
@@ -159,10 +194,13 @@ class _ScanQrisPage extends State<ScanQris> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
-                              child: const Icon(
-                                Icons.image_outlined,
-                                color: Colors.orange,
-                                size: 22.0,
+                              child: GestureDetector(
+                                onTap: _scanQRFromImage,
+                                child: const Icon(
+                                  Icons.image_outlined,
+                                  color: Colors.orange,
+                                  size: 22.0,
+                                ),
                               ),
                             )
                           ],
@@ -200,31 +238,7 @@ class _ScanQrisPage extends State<ScanQris> {
                 ResultScanModel result = ResultScanModel.fromJson(
                     jsonDecode(val.code ?? '') as Map<String, dynamic>);
 
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: const Duration(milliseconds: 600),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      var begin = const Offset(0.0, 1.0);
-                      var end = Offset.zero;
-                      var curve = Curves.ease;
-
-                      var tween = Tween(begin: begin, end: end)
-                          .chain(CurveTween(curve: curve));
-
-                      return SlideTransition(
-                        position: animation.drive(tween),
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        QrisPaymentPage(
-                      resulScanQris: result,
-                    ),
-                  ),
-                );
-                //Navigator.pop(context, val.code);
+                _navigation(context, result);
               }
             }
           }); // <-- Added missing semicolon here
@@ -258,4 +272,29 @@ class _ScanQrisPage extends State<ScanQris> {
     controller?.dispose();
     super.dispose();
   }
+}
+
+void _navigation(BuildContext context, ResultScanModel result) {
+  Navigator.push(
+    context,
+    PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 600),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = const Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+      pageBuilder: (context, animation, secondaryAnimation) => QrisPaymentPage(
+        resulScanQris: result,
+      ),
+    ),
+  );
 }
