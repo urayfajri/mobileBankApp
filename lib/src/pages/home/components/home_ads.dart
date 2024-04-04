@@ -8,7 +8,7 @@ class HomeAds extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
             border: Border(

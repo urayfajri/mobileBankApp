@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              padding: EdgeInsets.fromLTRB(10, 15, 10, 5),
               child: Column(
                 children: [
                   UserAccountInfo(),
