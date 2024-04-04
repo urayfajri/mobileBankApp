@@ -12,6 +12,72 @@ class HorizontalList extends StatefulWidget {
 }
 
 class _HorizontalListState extends State<HorizontalList> {
+  List<Map<String, dynamic>> dataList = [
+    {
+      'iconData': Icons.attach_money,
+      'label': 'e-money',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+    {
+      'iconData': Icons.attach_money,
+      'label': 'e-money',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+    {
+      'iconData': Icons.attach_money,
+      'label': 'e-money',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+  ];
+
+  List<Map<String, dynamic>> dataList2 = [
+    {
+      'iconData': Icons.attach_money,
+      'label': 'Test',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+    {
+      'iconData': Icons.attach_money,
+      'label': 'e-money',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+    {
+      'iconData': Icons.attach_money,
+      'label': 'e-money',
+      'iconBackgroundColor': Colors.orange,
+    },
+    {
+      'iconData': Icons.qr_code_scanner,
+      'label': 'QR Terima Transfer',
+      'iconBackgroundColor': Colors.blue,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,32 +86,32 @@ class _HorizontalListState extends State<HorizontalList> {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
-            blurRadius: 5,
-            offset: const Offset(0, 3),
+            blurRadius: 1,
+            offset: const Offset(0, 1),
           ),
         ],
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: dataList.length,
         itemBuilder: (context, index) {
           return Container(
             width: 80,
             height: 160,
             padding: const EdgeInsets.symmetric(vertical: 20),
             decoration: const BoxDecoration(color: Colors.white),
-            child: const Column(
+            child: Column(
               children: [
                 CustomIconBox(
-                  iconData: Icons.attach_money,
-                  label: 'e-money',
-                  iconBackgroundColor: Colors.orange,
+                  iconData: dataList[index]['iconData'],
+                  label: dataList[index]['label'],
+                  iconBackgroundColor: dataList[index]['iconBackgroundColor'],
                 ),
                 CustomIconBox(
-                  iconData: Icons.qr_code_scanner,
-                  label: 'QR Terima Transfer',
-                  iconBackgroundColor: Colors.blue,
+                  iconData: dataList2[index]['iconData'],
+                  label: dataList2[index]['label'],
+                  iconBackgroundColor: dataList2[index]['iconBackgroundColor'],
                 ),
               ],
             ),
