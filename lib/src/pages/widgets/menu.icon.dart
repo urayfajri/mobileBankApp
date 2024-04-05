@@ -30,18 +30,25 @@ class _CustomIconBoxState extends State<CustomIconBox> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Icon(widget.iconData, size: 30, color: Colors.white),
+            child: Icon(widget.iconData,
+                size: 30,
+                color: widget.iconBackgroundColor != Colors.white
+                    ? Colors.white
+                    : Colors.blue),
           ),
         ),
         const SizedBox(height: 5),
         Container(
           constraints: const BoxConstraints(maxWidth: 60, minWidth: 60),
           height: 35,
-          child: Text(
-            widget.label,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
-          ),
+          child: Text(widget.label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: widget.iconBackgroundColor != Colors.white
+                      ? Colors.black
+                      : Colors.white)),
         ),
       ],
     );

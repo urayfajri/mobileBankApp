@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile_bank_app/src/pages/widgets/mutation.menu.list.dart';
 // Import the clipboard package
 
 class MutationPage extends StatefulWidget {
@@ -72,6 +73,7 @@ class _MutationPageState extends State<MutationPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -84,6 +86,8 @@ class _MutationPageState extends State<MutationPage> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 30),
+                        MutationIconList(),
                       ],
                     ),
                   ],
