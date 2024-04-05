@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bank_app/src/pages/mutation.page.dart';
 import 'package:mobile_bank_app/src/pages/widgets/menu.icon.dart';
 
 class MutationIconList extends StatefulWidget {
@@ -15,27 +14,27 @@ class _MutationIconListState extends State<MutationIconList> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const CustomIconBox(
-              iconData: Icons.attach_money,
-              label: 'e-money',
+          CustomIconBox(
+              iconData: Icons.arrow_circle_right_outlined,
+              label: 'Transfer Rupiah',
               iconBackgroundColor: Colors.white),
-          const SizedBox(width: 10),
-          const CustomIconBox(
-              iconData: Icons.flash_off_outlined,
-              label: 'Quick Pick',
+          SizedBox(width: 10),
+          CustomIconBox(
+              iconData: Icons.receipt_long_rounded,
+              label: 'Bayar',
               iconBackgroundColor: Colors.white),
-          const SizedBox(width: 10),
-          const CustomIconBox(
-              iconData: Icons.money_outlined,
-              label: 'Setor Tarik',
+          SizedBox(width: 10),
+          CustomIconBox(
+              iconData: Icons.wallet,
+              label: 'Top-up',
               iconBackgroundColor: Colors.white),
-          const SizedBox(width: 10),
-          const CustomIconBox(
-              iconData: Icons.money_outlined,
-              label: 'Setor Tarik',
+          SizedBox(width: 10),
+          CustomIconBox(
+              iconData: Icons.credit_card,
+              label: 'Kartu Fisik/Virtual',
               iconBackgroundColor: Colors.white),
         ],
       ),
