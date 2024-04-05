@@ -37,9 +37,11 @@ class _CustomIconBoxState extends State<CustomIconBox> {
                     : Colors.blue),
           ),
         ),
-        const SizedBox(height: 5),
+        SizedBox(height: widget.iconBackgroundColor != Colors.white ? 5 : 10),
         Container(
-          constraints: const BoxConstraints(maxWidth: 60, minWidth: 60),
+          constraints: BoxConstraints(
+              maxWidth: widget.iconBackgroundColor != Colors.white ? 60 : 80,
+              minWidth: widget.iconBackgroundColor != Colors.white ? 60 : 80),
           height: 35,
           child: Text(widget.label,
               textAlign: TextAlign.center,
