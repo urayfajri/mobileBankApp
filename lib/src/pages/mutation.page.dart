@@ -110,6 +110,7 @@ class _MutationPageState extends State<MutationPage> {
                       length: 12,
                       child: Scaffold(
                         appBar: AppBar(
+                          automaticallyImplyLeading: false,
                           bottom: TabBar(
                             isScrollable: true,
                             indicatorColor: Colors.blue,
