@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/home.page.dart';
 import 'package:mobile_bank_app/src/pages/login.page.dart';
+import 'package:mobile_bank_app/src/pages/chat.page.dart';
 import 'package:mobile_bank_app/src/pages/widgets/test.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -18,6 +19,8 @@ class _NavigationPageState extends State<NavigationPage> {
     switch (currentIndex) {
       case 0:
         return const HomePage();
+      case 2:
+        return const ChatPage();
       default:
         return const TestPage();
     }
@@ -47,14 +50,46 @@ class _NavigationPageState extends State<NavigationPage> {
           enableFeedback: false,
           onTap: (index) {
             if (index == 4) {
-              Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.bottomToTop,
-                  duration: const Duration(milliseconds: 400),
-                  child: const LoginPage(),
-                  curve: Curves.easeInOut,
-                ),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Theme(
+                    data: ThemeData(
+                      primaryColor: Colors.blue,
+                      hintColor: Colors.blueAccent,
+                    ),
+                    child: AlertDialog(
+                      title: const Text('Logout',
+                          style: TextStyle(color: Colors.black)),
+                      content: const Text('Are you sure you want to logout?',
+                          style: TextStyle(color: Colors.black)),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Cancel',
+                              style: TextStyle(color: Colors.red)),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.bottomToTop,
+                                duration: const Duration(milliseconds: 400),
+                                child: const LoginPage(),
+                                curve: Curves.easeInOut,
+                              ),
+                            );
+                          },
+                          child: const Text('Logout',
+                              style: TextStyle(color: Colors.blue)),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               );
             } else {
               setState(() {
