@@ -106,16 +106,137 @@ class _MutationPageState extends State<MutationPage> {
                   shouldCloseOnMinExtent: false,
                   builder: (BuildContext context,
                       ScrollController scrollController) {
-                    return Container(
-                      color: Colors.white,
-                      child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: 25,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            title: Text('Item $index'),
-                          );
-                        },
+                    return DefaultTabController(
+                      length: 12,
+                      child: Scaffold(
+                        appBar: AppBar(
+                          bottom: TabBar(
+                            isScrollable: true,
+                            indicatorColor: Colors.blue,
+                            tabs: [
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Januari'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Februari'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Maret'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('April'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Mei'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Juni'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Juli'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Agustus'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('September'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Oktober'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('November'),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width / 5,
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                  child: Text('Desember'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        body: TabBarView(
+                          children: [
+                            ListView.builder(
+                              controller: scrollController,
+                              itemCount: 25,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ListTile(
+                                  title: Text('Item $index'),
+                                );
+                              },
+                            ),
+                            const Text('Februari'),
+                            const Text('Maret'),
+                            const Text('April'),
+                            const Text('Mei'),
+                            const Text('Juni'),
+                            const Text('Juli'),
+                            const Text('Agustus'),
+                            const Text('September'),
+                            const Text('Oktober'),
+                            const Text('November'),
+                            const Text('Desember'),
+                          ],
+                        ),
                       ),
                     );
                   },
