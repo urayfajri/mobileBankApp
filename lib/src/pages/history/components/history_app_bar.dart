@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/menu/menu.dart';
 
-class QrisPaymentAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const QrisPaymentAppBar({super.key});
+class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const HistoryAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class QrisPaymentAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       title: const Text(
-        'Pembayaran QRIS',
+        'Riwayat',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
@@ -23,6 +23,13 @@ class QrisPaymentAppBar extends StatelessWidget implements PreferredSizeWidget {
           print("item Pressed");
           Navigator.of(context).pop();
         },
+      ),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1.0),
+        child: Container(
+          color: Colors.grey[300],
+          height: 0.8,
+        ),
       ),
       actions: [
         IconButton(

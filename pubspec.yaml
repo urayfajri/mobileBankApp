@@ -55,6 +55,7 @@ dependencies:
   # dio: any
   # permission_handler: any
   # path_provider: any
+  cupertino_icons: ^1.0.2
 
 flutter_icons:
   android: true
