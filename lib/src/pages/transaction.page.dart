@@ -119,7 +119,7 @@ class _TransactionPageState extends State<TransactionPage> {
                               });
 
                               if (value.length > 4) {
-                                _showBlurDialog(context);
+                                _showBlurDialog(context, value);
                               }
                             },
                             //editing controller of this TextField
@@ -320,17 +320,309 @@ class _TransactionPageState extends State<TransactionPage> {
         ));
   }
 
-  void _showBlurDialog(BuildContext context) {
+  void _showBlurDialog(BuildContext context, String inputPrice) {
     showDialog(
       barrierColor: Colors.black.withOpacity(0.7),
       context: context,
       builder: (BuildContext context) {
-        return Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            color: Colors.white,
-            child: const Text('test'),
-          ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10),
+                  topLeft: Radius.circular(10),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 16, left: 16, top: 32, bottom: 24),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text(
+                          'Konfirmasi Transaksi',
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontFamily: 'Times New Roman',
+                              color: Colors.black),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.grey,
+                              size: 24,
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 202, 200, 200),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(14),
+                                child: Text(
+                                  getInitialWord(resultScan.name),
+                                  style: const TextStyle(
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      fontFamily: 'Noto Sans',
+                                      color:
+                                          Color.fromARGB(255, 122, 121, 121)),
+                                ),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 8),
+                                  color: Colors.white,
+                                  child: Text(
+                                    resultScan.name,
+                                    style: const TextStyle(
+                                        decoration: TextDecoration.none,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        fontFamily: 'Times New Roman',
+                                        color: Colors.black),
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 8),
+                                  child: Text(
+                                    resultScan.city,
+                                    style: const TextStyle(
+                                        decoration: TextDecoration.none,
+                                        fontFamily: 'Times New Roman',
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromARGB(255, 112, 109, 109),
+                                        fontSize: 14),
+                                  ),
+                                ),
+                                Text(
+                                  'Merchant PAN • ${resultScan.kodepan}',
+                                  style: const TextStyle(
+                                      decoration: TextDecoration.none,
+                                      fontFamily: 'Times New Roman',
+                                      fontWeight: FontWeight.w100,
+                                      color: Colors.grey,
+                                      fontSize: 10),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text(
+                          'Nominal',
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w100,
+                              fontFamily: 'Times New Roman',
+                              color: Colors.black),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Text(
+                            inputPrice,
+                            style: const TextStyle(
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                fontFamily: 'Times New Roman',
+                                color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: 8,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 243, 243, 243),
+              ),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 16, left: 16, top: 16, bottom: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    const Text(
+                      'Sumber Dana',
+                      style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w100,
+                          fontSize: 16,
+                          fontFamily: 'Times New Roman',
+                          color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                        ),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 196, 196, 196)
+                                  .withOpacity(0.3), // Shadow color
+                              spreadRadius: 3, // Spread radius
+                              blurRadius: 3, // Blur radius
+                              offset: const Offset(
+                                  -3, 3), // Offset in x and y direction
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    '${_isSavingClicked ? 'Tabungan' : 'Kredit'} Mandiri  071237463527',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.none,
+                                        fontSize: 14,
+                                        fontFamily: 'Times New Roman',
+                                        color: Colors.black),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const Text(
+                                'RP 271.000.000',
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 16,
+                                    fontFamily: 'Times New Roman',
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextButton(
+                        onPressed: () {
+                          // Button action
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32.0),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Lanjut Bayar',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    inputPrice,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
