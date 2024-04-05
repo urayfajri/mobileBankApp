@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/src/pages/history/history.dart';
 import 'package:mobile_bank_app/src/pages/home/home.dart';
-import 'package:mobile_bank_app/src/pages/login.page.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_chat_us.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_bottom_bar.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_qris.dart';
@@ -19,10 +19,9 @@ class MenuState extends State<Menu> {
   final List<Widget> _pages = const [
     Home(),
     Pages(
-      iconData: Icons.article,
-      text: "Transaction",
+      iconData: Icons.history,
+      text: "History",
     ),
-    // QrisPaymentPage(),
     Pages(
       iconData: Icons.qr_code,
       text: "QRIS",
@@ -31,7 +30,10 @@ class MenuState extends State<Menu> {
       iconData: Icons.feed,
       text: "FEED",
     ),
-    SettingPage(),
+    Pages(
+      iconData: Icons.settings,
+      text: "Settings",
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -40,6 +42,13 @@ class MenuState extends State<Menu> {
         context,
         MaterialPageRoute(
           builder: (context) => const ScanQris(),
+        ),
+      );
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HistoryPage(),
         ),
       );
     } else {
@@ -107,37 +116,6 @@ class Pages extends StatelessWidget {
               style: const TextStyle(fontSize: 30),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => {
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    const LoginPage(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-              ),
-            ),
-          },
-          child: const Text("Logout"),
         ),
       ),
     );
