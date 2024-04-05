@@ -32,7 +32,7 @@ class _PopUpFormLoginState extends State<PopUpFormLogin> {
             context: context,
             content: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 300,
+              height: 250,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
