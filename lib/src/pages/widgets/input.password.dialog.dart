@@ -44,11 +44,9 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
           const SizedBox(height: 30),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: Material(
               color: Colors.transparent,
-              alignment: Alignment.topCenter,
+              elevation: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -129,7 +127,8 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.blue,
-                      minimumSize: const Size.fromHeight(50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 136, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
