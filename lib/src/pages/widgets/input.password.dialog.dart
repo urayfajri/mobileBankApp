@@ -44,9 +44,11 @@ class _InputPasswordDialogState extends State<InputPasswordDialog> {
           const SizedBox(height: 30),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: Material(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               color: Colors.transparent,
-              elevation: 0,
+              alignment: Alignment.topCenter,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
