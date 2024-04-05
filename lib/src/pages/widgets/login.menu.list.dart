@@ -90,8 +90,8 @@ class _MenuIconsState extends State<MenuIcons> {
               minimumSize: Size.zero,
             ),
             child: const CustomIconBox(
-                iconData: Icons.qr_code_scanner,
-                label: 'QR Terima Transfer',
+                iconData: Icons.receipt_long_sharp,
+                label: 'Mutation',
                 iconBackgroundColor: Colors.blue),
           ),
           const SizedBox(width: 10),
