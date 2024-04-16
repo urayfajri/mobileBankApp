@@ -13,7 +13,7 @@ class GeneralSettingsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.setting,
+          AppLocalizations.of(context)!.generalSetting,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -50,28 +50,28 @@ class SettingLanguageButton extends StatelessWidget {
         foregroundColor: const Color.fromARGB(255, 207, 207, 207),
         shadowColor: Colors.transparent,
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(5),
+      child: Padding(
+        padding: const EdgeInsets.all(5),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.translate,
                   color: Colors.orange,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
-                  "Bahasa",
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.language,
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
               ],
             ),
-            Icon(
+            const Icon(
               Icons.chevron_right,
               color: Colors.grey,
               size: 30,

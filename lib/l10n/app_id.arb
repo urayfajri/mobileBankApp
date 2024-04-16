@@ -1,5 +1,8 @@
 {
-    "helloWorld": "Halo Dunia!",
-    "setting": "Pengaturan",
-    "selectLanguage": "Pilih Bahasa"
+  "helloWorld": "Halo Dunia!",
+  "selectLanguage": "Pilih Bahasa",
+  "settings": "Pengaturan",
+  "generalSetting": "Pengaturan Umum",
+  "language": "Bahasa",
+  "chooseLanguage": "Pilih Bahasa"
 }

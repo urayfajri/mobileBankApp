@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_bank_app/config/language.dart';
 import 'package:mobile_bank_app/config/language_constant.dart';
 import 'package:mobile_bank_app/main.dart';
@@ -9,9 +10,9 @@ class LanguageSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: GeneralAppBar(title: "Bahasa"),
-      body: _LanguageSettingBody(),
+    return Scaffold(
+      appBar: GeneralAppBar(title: AppLocalizations.of(context)!.language),
+      body: const _LanguageSettingBody(),
     );
   }
 }
@@ -46,8 +47,6 @@ class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
   @override
   void initState() {
     super.initState();
-    selectedItem =
-        Language.languageList().firstWhere((lang) => lang.languageCode == 'id');
   }
 
   void setSelectedItem(Language? newValue) {
@@ -61,9 +60,9 @@ class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Pilih Bahasa",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        Text(
+          AppLocalizations.of(context)!.chooseLanguage,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -75,6 +74,7 @@ class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
                 setSelectedItem(language);
               }
             },
+            value: selectedItem,
             isExpanded: true,
             iconEnabledColor: Colors.grey,
             icon: const Icon(Icons.expand_more),

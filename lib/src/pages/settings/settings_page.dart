@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_bank_app/src/pages/settings/components/general_settings_section.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -8,7 +9,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pengaturan"),
+        title: Text(
+          AppLocalizations.of(context)!.settings,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
