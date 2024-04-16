@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bank_app/config/language.dart';
+import 'package:mobile_bank_app/config/language_constant.dart';
+import 'package:mobile_bank_app/main.dart';
 import 'package:mobile_bank_app/src/pages/settings/components/general/general_app_bar.dart';
 
 class LanguageSettingPage extends StatelessWidget {
@@ -37,18 +40,21 @@ class _LanguageSelectDropdown extends StatefulWidget {
 }
 
 class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
-  String selectedItem = "Indonesia";
+  Language? selectedItem;
+  String? select;
 
-  void setSelectedItem(newValue) {
-    setState(() {
-      selectedItem = newValue!;
-    });
+  @override
+  void initState() {
+    super.initState();
+    selectedItem =
+        Language.languageList().firstWhere((lang) => lang.languageCode == 'id');
   }
 
-  static const items = [
-    'Indonesia',
-    'English',
-  ];
+  void setSelectedItem(Language? newValue) {
+    setState(() {
+      select = newValue!.name;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,25 +67,34 @@ class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: DropdownButton<String>(
+          child: DropdownButton<Language>(
+            onChanged: (Language? language) async {
+              if (language != null) {
+                Locale locale = await setLocale(language.languageCode);
+                MyApp.setLocale(context, locale);
+                setSelectedItem(language);
+              }
+            },
             isExpanded: true,
             iconEnabledColor: Colors.grey,
-            value: selectedItem,
             icon: const Icon(Icons.expand_more),
-            onChanged: (String? newValue) {
-              setSelectedItem(newValue!);
-            },
-            items: items.map<DropdownMenuItem<String>>(
-              (String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: const TextStyle(fontWeight: FontWeight.w400),
+            items: Language.languageList()
+                .map<DropdownMenuItem<Language>>(
+                  (e) => DropdownMenuItem<Language>(
+                    value: e,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          e.flag,
+                          style: const TextStyle(fontSize: 30),
+                        ),
+                        Text(e.name)
+                      ],
+                    ),
                   ),
-                );
-              },
-            ).toList(),
+                )
+                .toList(),
           ),
         )
       ],

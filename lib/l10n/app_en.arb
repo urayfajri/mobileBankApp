@@ -1,0 +1,8 @@
+{
+  "helloWorld": "Hello World!",
+  "setting": "Setting",
+  "selectLanguage": "Select Language",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}

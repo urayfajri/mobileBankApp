@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_bank_app/src/pages/settings/components/general/language_setting_page.dart';
 
 class GeneralSettingsSection extends StatelessWidget {
@@ -8,18 +9,18 @@ class GeneralSettingsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Pengaturan Umum",
-          style: TextStyle(
+          AppLocalizations.of(context)!.setting,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 20),
-        SettingLanguageButton()
+        const SizedBox(height: 20),
+        const SettingLanguageButton()
       ],
     );
   }
