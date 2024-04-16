@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mobile_bank_app/config/language.dart';
+import 'package:mobile_bank_app/config/language_constant.dart';
+import 'package:mobile_bank_app/main.dart';
 import 'package:mobile_bank_app/src/widgets/btn_chat_us.dart';
 import 'package:mobile_bank_app/src/widgets/btn_menu_login.dart';
 import 'package:mobile_bank_app/src/widgets/pop_up_login.dart';
-// import 'package:mobile_bank_app/src/widgets/pop_up_login.dart';
-// import 'package:mobile_bank_app/src/widgets/popup_login.dart';
 import 'package:mobile_bank_app/src/widgets/popup_top.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late bool isAlertTop;
+  // Default language is English
   @override
   void initState() {
     super.initState();
@@ -60,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          Text(AppLocalizations.of(context)!.helloWorld),
                           Image.asset(
                             'assets/images/logo_bni.png',
                             width: 200,
@@ -78,13 +82,46 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         elevation: 0, // Removes the shadow
         color: Colors.transparent,
-        height: 100,
-        child: Row(
+        height: 160,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [BtnChatUs()],
+          children: [
+            const BtnChatUs(),
+            DropdownButton<Language>(
+              underline: const SizedBox(),
+              icon: const Icon(
+                Icons.language,
+                color: Colors.black,
+              ),
+              onChanged: (Language? language) async {
+                if (language != null) {
+                  Locale locale = await setLocale(language.languageCode);
+                  // ignore: use_build_context_synchronously
+                  MyApp.setLocale(context, locale);
+                }
+              },
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>(
+                    (e) => DropdownMenuItem<Language>(
+                      value: e,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Text(
+                            e.flag,
+                            style: const TextStyle(fontSize: 30),
+                          ),
+                          Text(e.name)
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
         ),
       ),
     );

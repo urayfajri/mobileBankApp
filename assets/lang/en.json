@@ -1,0 +1,4 @@
+{
+    "hello_msg": "Hello",
+    "hello_person": "Hello {name}"
+}
