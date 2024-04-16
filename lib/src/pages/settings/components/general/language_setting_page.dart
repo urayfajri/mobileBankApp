@@ -11,7 +11,8 @@ class LanguageSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GeneralAppBar(title: AppLocalizations.of(context)!.language),
+      appBar:
+          GeneralAppBar(title: AppLocalizations.of(context)!.settingLanguage),
       body: const _LanguageSettingBody(),
     );
   }
@@ -61,7 +62,7 @@ class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.chooseLanguage,
+          AppLocalizations.of(context)!.settingChooseLanguage,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         SizedBox(

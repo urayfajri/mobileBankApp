@@ -13,7 +13,7 @@ class GeneralSettingsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.generalSetting,
+          AppLocalizations.of(context)!.settingGeneral,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class SettingLanguageButton extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  AppLocalizations.of(context)!.language,
+                  AppLocalizations.of(context)!.settingLanguage,
                   style: const TextStyle(
                     color: Colors.black,
                   ),

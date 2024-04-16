@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -33,26 +34,26 @@ class BottomNavBar extends StatelessWidget {
         selectedLabelStyle: const TextStyle(fontSize: 13),
         unselectedLabelStyle: const TextStyle(fontSize: 13),
         iconSize: 35,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
+            icon: const Icon(Icons.home_outlined),
+            label: AppLocalizations.of(context)!.menuHome,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Riwayat',
+            icon: const Icon(Icons.history),
+            label: AppLocalizations.of(context)!.menuHistory,
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(null),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_outline),
-            label: 'Favorit',
+            icon: const Icon(Icons.star_outline),
+            label: AppLocalizations.of(context)!.menuFavorite,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Pengaturan',
+            icon: const Icon(Icons.settings_outlined),
+            label: AppLocalizations.of(context)!.menuSettings,
           ),
         ],
       ),

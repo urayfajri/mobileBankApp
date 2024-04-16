@@ -1,8 +1,12 @@
 {
-  "helloWorld": "Halo Dunia!",
-  "selectLanguage": "Pilih Bahasa",
-  "settings": "Pengaturan",
-  "generalSetting": "Pengaturan Umum",
-  "language": "Bahasa",
-  "chooseLanguage": "Pilih Bahasa"
+  "@_settings": {},
+  "setting": "Pengaturan",
+  "settingGeneral": "Pengaturan Umum",
+  "settingLanguage": "Bahasa",
+  "settingChooseLanguage": "Pilih Bahasa",
+  "@_menu": {},
+  "menuHome": "Beranda",
+  "menuHistory": "Riwayat",
+  "menuFavorite": "Favorit",
+  "menuSettings": "Pengaturan"
 }

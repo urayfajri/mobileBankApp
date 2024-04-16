@@ -10,7 +10,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!.settings,
+          AppLocalizations.of(context)!.setting,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         automaticallyImplyLeading: false,
