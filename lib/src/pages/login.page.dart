@@ -63,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text(AppLocalizations.of(context)!.helloWorld),
                           Image.asset(
                             'assets/images/logo_bni.png',
                             width: 200,
