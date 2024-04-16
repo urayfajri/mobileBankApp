@@ -22,23 +22,21 @@ class _LanguageSettingBody extends StatelessWidget {
       padding: EdgeInsets.all(30),
       child: Column(
         children: [
-          _HistoryAccountSelectDropdown(),
+          _LanguageSelectDropdown(),
         ],
       ),
     );
   }
 }
 
-class _HistoryAccountSelectDropdown extends StatefulWidget {
-  const _HistoryAccountSelectDropdown();
+class _LanguageSelectDropdown extends StatefulWidget {
+  const _LanguageSelectDropdown();
 
   @override
-  _HistoryAccountSelectDropdownState createState() =>
-      _HistoryAccountSelectDropdownState();
+  _LanguageSelectDropdownState createState() => _LanguageSelectDropdownState();
 }
 
-class _HistoryAccountSelectDropdownState
-    extends State<_HistoryAccountSelectDropdown> {
+class _LanguageSelectDropdownState extends State<_LanguageSelectDropdown> {
   String selectedItem = "Indonesia";
 
   void setSelectedItem(newValue) {
