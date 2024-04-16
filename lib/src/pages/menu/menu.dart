@@ -5,6 +5,7 @@ import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_chat_us.dart'
 import 'package:mobile_bank_app/src/pages/menu/components/menu_bottom_bar.dart';
 import 'package:mobile_bank_app/src/pages/menu/components/menu_btn_qris.dart';
 import 'package:mobile_bank_app/src/pages/scan_qris.dart';
+import 'package:mobile_bank_app/src/pages/settings/settings_page.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -30,10 +31,7 @@ class MenuState extends State<Menu> {
       iconData: Icons.feed,
       text: "FEED",
     ),
-    Pages(
-      iconData: Icons.settings,
-      text: "Settings",
-    ),
+    SettingsPage()
   ];
 
   void _onItemTapped(int index) {

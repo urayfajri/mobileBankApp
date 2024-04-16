@@ -82,41 +82,52 @@ class _DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<_DatePicker> {
   late DateTime _selectedDate;
+  late DateTime _tempSelectedDate;
 
   @override
   void initState() {
     super.initState();
+    _tempSelectedDate = DateTime.now();
     _selectedDate = DateTime.now();
+  }
+
+  void setDate(newDate) {
+    setState(() {
+      _selectedDate = newDate;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              onPressed: () {
-                _showDatePicker(context);
-              },
-              child: Text(
-                '${_selectedDate.year}/${_selectedDate.month}/${_selectedDate.day}',
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-              ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(0),
+              backgroundColor: Colors.white,
+              elevation: 0,
             ),
-          ],
-        ),
+            onPressed: () {
+              _showDatePicker(context);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.calendar_month),
+                const SizedBox(width: 5),
+                Text(
+                  '${_selectedDate.year}/${_selectedDate.month}/${_selectedDate.day}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -128,63 +139,83 @@ class _DatePickerState extends State<_DatePicker> {
         return Container(
           height: 350,
           color: Colors.white,
-          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CupertinoButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    color: Colors.transparent,
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 1.0,
                     ),
                   ),
-                  CupertinoButton(
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      Navigator.of(context).pop(_selectedDate);
-                    },
-                    color: Colors.transparent,
-                    child: const Text(
-                      'Confirm',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CupertinoButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          color: Colors.transparent,
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        CupertinoButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {
+                            setDate(_tempSelectedDate);
+                            Navigator.of(context).pop(_selectedDate);
+                          },
+                          color: Colors.transparent,
+                          child: const Text(
+                            'Confirm',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Material(
+                      child: Text(
+                        "Tahun / Bulan / Tanggal",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const Text(
-                "Tahun / Bulan / Tanggal",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
+                  ],
                 ),
               ),
               const SizedBox(height: 10),
               SizedBox(
                 height: 200,
+                width: 300,
                 child: CupertinoDatePicker(
+                  dateOrder: DatePickerDateOrder.ymd,
                   mode: CupertinoDatePickerMode.date,
                   initialDateTime: _selectedDate,
                   minimumDate:
-                      DateTime.now().subtract(Duration(days: 365 * 20)),
-                  maximumDate: DateTime.now().add(Duration(days: 365 * 20)),
+                      DateTime.now().subtract(const Duration(days: 365 * 10)),
+                  maximumDate:
+                      DateTime.now().add(const Duration(days: 365 * 5)),
                   onDateTimeChanged: (DateTime newDate) {
                     setState(() {
-                      _selectedDate = newDate;
+                      _tempSelectedDate = newDate;
                     });
                   },
                 ),
@@ -196,7 +227,7 @@ class _DatePickerState extends State<_DatePicker> {
     );
     if (pickedDate != null) {
       setState(() {
-        _selectedDate = pickedDate;
+        _tempSelectedDate = pickedDate;
       });
     }
   }
