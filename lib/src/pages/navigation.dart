@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_bank_app/src/pages/home.page.dart';
 import 'package:mobile_bank_app/src/pages/login.page.dart';
 import 'package:mobile_bank_app/src/pages/chat.page.dart';
+import 'package:mobile_bank_app/src/pages/setting.page.dart';
 import 'package:mobile_bank_app/src/pages/widgets/test.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -21,6 +22,8 @@ class _NavigationPageState extends State<NavigationPage> {
         return const HomePage();
       case 2:
         return const ChatPage();
+      case 3:
+        return const SettingPage();
       default:
         return const TestPage();
     }
