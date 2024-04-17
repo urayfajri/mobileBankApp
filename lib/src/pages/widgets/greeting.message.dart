@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class GreetingMessage extends StatefulWidget {
   const GreetingMessage({super.key, required this.name});
@@ -20,7 +21,7 @@ class _GreetingMessageState extends State<GreetingMessage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Selamat siang, ',
+            'welcome-text'.i18n(),
             style: TextStyle(color: Colors.blue[900], fontSize: 16),
           ),
           Text(

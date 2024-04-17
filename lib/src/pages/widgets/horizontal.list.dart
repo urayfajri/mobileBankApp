@@ -10,8 +10,9 @@ class HorizontalList extends StatefulWidget {
 }
 
 class _HorizontalListState extends State<HorizontalList> {
-  int _left = 50;
-  int _right = 20;
+  int _left = 25;
+  int _right = 15;
+  bool arrowFlag = false;
 
   List<Map<String, dynamic>> dataList = [
     {
@@ -91,13 +92,15 @@ class _HorizontalListState extends State<HorizontalList> {
     if (_scrollController.position.pixels < 40) {
       // If at the maximum scroll position
       setState(() {
-        _left = 50;
-        _right = 20;
+        _left = 25;
+        _right = 15;
+        arrowFlag = false;
       });
     } else {
       setState(() {
-        _left = 30;
-        _right = 0;
+        _left = 15;
+        _right = 25;
+        arrowFlag = true;
       });
     }
   }
@@ -154,39 +157,66 @@ class _HorizontalListState extends State<HorizontalList> {
           ),
           Positioned(
             bottom: 4,
-            left: MediaQuery.of(context).size.width / 2 - 10,
-            child: IconButton(
-              onPressed: () {
-                _scrollController.animateTo(
-                  6 * 80.0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                );
-              },
-              icon: const Icon(
-                Icons.arrow_forward,
-                color: Colors.blue,
+            left: MediaQuery.of(context).size.width / 2 + 20,
+            child: !arrowFlag
+                ? IconButton(
+                    onPressed: () {
+                      _scrollController.animateTo(
+                        6 * 80.0,
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.blue,
+                    ),
+                  )
+                : const SizedBox(),
+          ),
+          Positioned(
+            bottom: 4,
+            left: MediaQuery.of(context).size.width / 2 - 70,
+            child: arrowFlag
+                ? IconButton(
+                    onPressed: () {
+                      _scrollController.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.blue,
+                    ),
+                  )
+                : const SizedBox(),
+          ),
+          Positioned(
+            bottom: 25,
+            left: MediaQuery.of(context).size.width / 2 - 25,
+            right: MediaQuery.of(context).size.width / 2 - 25,
+            child: Container(
+              width: 50,
+              height: 5,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
           Positioned(
             bottom: 25,
-            left: MediaQuery.of(context).size.width / 2 - 50,
-            right: MediaQuery.of(context).size.width / 2,
-            child: Container(
-              width: 50,
-              height: 5,
-              color: Colors.grey[300],
-            ),
-          ),
-          Positioned(
-            bottom: 25,
             left: MediaQuery.of(context).size.width / 2 - _left,
-            right: MediaQuery.of(context).size.width / 2 + _right,
+            right: MediaQuery.of(context).size.width / 2 - _right,
             child: Container(
               width: 50,
               height: 5,
-              color: Colors.blue,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           )
         ],

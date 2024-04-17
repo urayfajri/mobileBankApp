@@ -35,14 +35,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   qr_code_scanner: ^1.0.1
-  intl: ^0.19.0
+  intl: ^0.18.1
   top_modal_sheet: ^2.1.0
   flutter_secure_storage: ^9.0.0
   page_transition: ^2.1.0
+  flutter_localizations:
+    sdk: flutter
+  localization: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  intl_translation: any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -56,12 +60,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
 
   assets:
     - assets/images/qris_logo.png
+    - lib/i18n/
 
   uses-material-design: true
 

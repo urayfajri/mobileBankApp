@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class SimpleBanner extends StatefulWidget {
   const SimpleBanner({super.key});
@@ -41,9 +42,9 @@ class _SimpleBannerState extends State<SimpleBanner> {
               children: [
                 Container(
                   constraints: const BoxConstraints(maxWidth: 200),
-                  child: const Text(
-                    'Mau transfer, bayar dan top up lebih cepat?',
-                    style: TextStyle(color: Colors.black, fontSize: 18),
+                  child: Text(
+                    'ads-text'.i18n(),
+                    style: const TextStyle(color: Colors.black, fontSize: 18),
                   ),
                 ),
                 Container(
@@ -56,7 +57,7 @@ class _SimpleBannerState extends State<SimpleBanner> {
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.blue,
                     ),
-                    child: const Text('Atur Sekarang'),
+                    child: Text('ads-button'.i18n()),
                   ),
                 ),
               ],
